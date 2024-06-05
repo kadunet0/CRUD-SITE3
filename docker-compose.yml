@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: Kadu2003.
+      MYSQL_DATABASE: crud
+    volumes:
+      - ./crud_usuarios.sql:/docker-entrypoint-initdb.d/crud_usuarios.sql
+    ports:
+      - "3307:3307"
+    networks:
+      - crud2_mynetwork
+
+  api:
+    build: ./api
+    container_name: api_container
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3307
+      DB_USER: root
+      DB_PASSWORD: Kadu2003.
+      DB_NAME: crud
+    ports:
+      - "3000:3000"
+    networks:
+      - crud2_mynetwork
+
+  frontend:
+    build: ./frontend
+    container_name: frontend_container
+    environment:
+      API_URL: http://api:3000
+    ports:
+      - "80:80"
+    networks:
+      - crud2_mynetwork
+
+networks:
+  crud2_mynetwork:
+    driver: bridge
