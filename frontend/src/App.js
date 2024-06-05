@@ -25,7 +25,9 @@ function App() {
   
   const getUsers = async () => {
     try {
-      const res = await axios.get("http://localhost:8800");
+      const API_URL = process.env.REACT_APP_API_URL || "http://api:8800";
+const res = await axios.get(`${API_URL}`);
+
 
       setUsers(res.data.sort((a, b) => (a.nome > b.nome ? 1 : -1)));
     } catch (error) {

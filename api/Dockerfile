@@ -12,4 +12,4 @@ RUN yarn install
 # Usar o script de inicialização do package.json
 CMD ["yarn", "start"]
 
-EXPOSE 3000
+EXPOSE 3001
