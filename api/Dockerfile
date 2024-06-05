@@ -3,6 +3,7 @@
 FROM node:latest
 
 WORKDIR /api
+
 COPY . .
 
 # Instalar todas as dependências, incluindo as de desenvolvimento
