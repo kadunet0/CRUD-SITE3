@@ -12,7 +12,7 @@ services:
     ports:
       - "3307:3307"
     networks:
-      - crud2_mynetwork
+      - crud2_crud2_mynetwork
 
   api:
     build: ./api
@@ -24,20 +24,20 @@ services:
       DB_PASSWORD: Kadu2003.
       DB_NAME: crud
     ports:
-      - "3000:3000"
+      - "8800:8800"
     networks:
-      - crud2_mynetwork
+      - crud2_crud2_mynetwork
 
   frontend:
     build: ./frontend
     container_name: frontend_container
     environment:
-      API_URL: http://api:3000
+      API_URL: http://api:8800
     ports:
       - "80:80"
     networks:
-      - crud2_mynetwork
+      - crud2_crud2_mynetwork
 
 networks:
-  crud2_mynetwork:
+  crud2_crud2_mynetwork:
     driver: bridge
