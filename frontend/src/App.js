@@ -25,14 +25,10 @@ function App() {
   
   const getUsers = async () => {
     try {
-      const API_URL = process.env.REACT_APP_API_URL || "http://api:8800";
-const res = await axios.get(`${API_URL}`);
-
-
+      const res = await axios.get("http://localhost:8800");
       setUsers(res.data.sort((a, b) => (a.nome > b.nome ? 1 : -1)));
     } catch (error) {
       toast.error(error);
-      console.log(error); // Adiciona esta linha para exibir o erro detalhado no console do navegador
     }
   };
   

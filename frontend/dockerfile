@@ -1,23 +1,21 @@
-# Use a imagem base do Node.js
+# Estágio de compilação
 FROM node:latest
 
-# Define o diretório de trabalho dentro do container
-WORKDIR /app
+WORKDIR /tmp/react
 
-# Copia o package.json e o yarn.lock para o diretório de trabalho
-COPY package.json yarn.lock ./
-
-# Instala as dependências
-RUN yarn install
-
-# Copia todos os arquivos do projeto para o diretório de trabalho
 COPY . .
 
-# Compila o projeto (se necessário)
+RUN rm -rf node_modules
+RUN yarn install
+
 RUN yarn run build
 
-# Expõe a porta 80
-EXPOSE 80
+RUN mkdir -p /var/www/html
 
-# Comando para iniciar a aplicação
-CMD ["yarn", "start"]
+RUN mv build/* /var/www/html
+
+VOLUME /var/www/html
+
+WORKDIR /
+
+RUN rm -rf /tmp/react

@@ -38,6 +38,17 @@ services:
     networks:
       - crud2_crud2_mynetwork
 
+  nginx:
+    image: nginx:latest
+    container_name: nginx_container
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./frontend/build:/usr/share/nginx/html
+    ports:
+      - "8080:80" # Mapeia a porta 8080 do host para a porta 80 do contêiner NGINX
+    networks:
+      - crud2_crud2_mynetwork
+
 networks:
   crud2_crud2_mynetwork:
     driver: bridge
